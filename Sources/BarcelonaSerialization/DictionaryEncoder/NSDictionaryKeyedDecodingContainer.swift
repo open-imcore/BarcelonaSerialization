@@ -97,6 +97,10 @@ public struct NSDictionaryKeyedDecodingContainer<K: CodingKey>: KeyedDecodingCon
         try decode(type, key: key)
     }
     
+    public func decode(_ type: Data.Type, forKey key: K) throws -> Data {
+        try decode(type, key: key)
+    }
+    
     private func decode<P>(_ type: P.Type, key: K) throws -> P {
         updatePath(key)
         

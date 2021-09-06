@@ -78,6 +78,10 @@ public struct NSDictionarySingleValueDecodingContainer: SingleValueDecodingConta
         try decodePrimitive(type)
     }
     
+    public func decode(_ type: Data.Type) throws -> Data {
+        try decodePrimitive(type)
+    }
+    
     public func decode<T>(_ type: T.Type) throws -> T where T : Decodable {
         try T(from: NSDictionaryDecoder.init(withUnderlyingObject: underlyingValue ?? NSNull(), at: codingPath))
     }
