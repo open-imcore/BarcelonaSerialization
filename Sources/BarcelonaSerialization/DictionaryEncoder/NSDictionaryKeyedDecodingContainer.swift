@@ -112,6 +112,10 @@ public struct NSDictionaryKeyedDecodingContainer<K: CodingKey>: KeyedDecodingCon
     }
     
     public func decode<T>(_ type: T.Type, forKey key: K) throws -> T where T : Decodable {
+        if type is Data.Type {
+            return try decode(Data.self, forKey: key) as! T
+        }
+        
         updatePath(key)
         
         guard let value = underlyingDictionary[key.stringValue] else {

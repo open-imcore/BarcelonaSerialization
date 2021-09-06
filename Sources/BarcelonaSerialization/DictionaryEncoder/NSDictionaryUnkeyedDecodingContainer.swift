@@ -105,6 +105,10 @@ public struct NSDictionaryUnkeyedDecodingContainer: UnkeyedDecodingContainer, Co
     }
     
     public mutating func decode<T>(_ type: T.Type) throws -> T where T : Decodable {
+        if type is Data.Type {
+            return try decode(Data.self) as! T
+        }
+        
         try assertNotCorrupted()
         
         updatePath(currentKey)
